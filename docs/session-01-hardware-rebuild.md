@@ -66,9 +66,11 @@ The physical display was reconnected to the Arduino and the AOI face was success
 
 ### Evidence
 
-![AOI Arduino and SSD1306 showing the working face](../media/session-01-working-face.jpg)
+![AOI components](../media/session-01-components.jpg)
 
-The photo records the reconstructed physical interface with the Arduino powered over USB and the OLED actively rendering the AOI face.
+![AOI connected hardware](../media/session-01-connected.jpg)
+
+The photographs record the component baseline and the reconstructed physical interface with the Arduino powered over USB and the OLED actively rendering the AOI face.
 
 ## Result
 

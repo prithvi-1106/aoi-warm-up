@@ -13,6 +13,7 @@ The original prototype combined a webcam, speech recognition, a cloud multimodal
 | I2C communication | Working |
 | Animated AOI face | Working |
 | Serial face-state control | Working |
+| Python emotion control GUI | Working |
 | Python assistant | Prototype |
 | Webcam vision | Prototype |
 | Speech recognition | Prototype |
@@ -39,12 +40,9 @@ The OLED is the first physical output interface. The objective is to make the ph
 
 The first rebuild session focused on the minimum working physical interface.
 
-![AOI components](media/session-01-working-face.jpg)
+![AOI hardware](media/session-01-working-face.jpg)
 
-The component photo records the Arduino Uno and SSD1306 OLED before the connection was rebuilt.
-
-
-The connected hardware evidence is recorded in the Session 1 documentation and will be added to the media directory at full resolution.
+The connected hardware evidence records the Arduino Uno driving the SSD1306 OLED face.
 
 The current I2C wiring is:
 
@@ -61,9 +59,15 @@ The current I2C wiring is:
 
 [Read the full Session 1 documentation](docs/session-01-hardware-rebuild.md).
 
-## OLED Face Protocol
+## Session 2 — Python ↔ Arduino Emotion Control
 
-The Arduino firmware accepts one ASCII character at a time:
+The second session connected the Python layer to the working Arduino face.
+
+The bridge uses:
+
+`Python → USB serial → Arduino → I2C → OLED`
+
+The Arduino accepts the same seven face states:
 
 | Command | State |
 |---:|---|
@@ -74,6 +78,16 @@ The Arduino firmware accepts one ASCII character at a time:
 | 4 | Happy |
 | 5 | Sad |
 | 6 | Confused |
+
+I also added a small Tkinter control window so I can type a state number and immediately update AOI's physical expression.
+
+The seven states were tested individually and are working through the Python-to-Arduino path.
+
+[Read the full Session 2 documentation](docs/session-02-python-arduino-emotions.md).
+
+## OLED Face Protocol
+
+The Arduino firmware accepts one ASCII character at a time over serial at **9600 baud**.
 
 The firmware also includes automatic blinking for selected states.
 
@@ -88,6 +102,7 @@ The firmware also includes automatic blinking for selected states.
 - groq
 - SpeechRecognition
 - pyaudiowpatch
+- tkinter
 
 Standard-library modules used by the prototype include time, sys, base64, re, threading, asyncio, and tkinter.
 
@@ -125,7 +140,7 @@ This repository is therefore both the project source and the development record.
 
 ## Next Milestone
 
-The next stage is to turn the working face prototype into a reproducible Arduino firmware project, record the exact library requirements, test every face state individually, and verify the serial commands before reconnecting the Python system.
+The next stage is to connect the emotion controller to the main Python assistant so that AOI can change its physical expression automatically while thinking, speaking, listening, and responding.
 
 ## Security
 
@@ -138,7 +153,4 @@ API keys and credentials are kept out of the repository. The previous Python pro
 - [Project specification](docs/project-spec.md)
 - [Development log](docs/development-log.md)
 - [Session 1 — Hardware Reconstruction](docs/session-01-hardware-rebuild.md)
-
-### Session 1 Evidence
-
-- [Component photo](media/session-01-components.jpg)
+- [Session 2 — Python ↔ Arduino Emotion Control](docs/session-02-python-arduino-emotions.md)

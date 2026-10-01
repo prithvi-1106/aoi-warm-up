@@ -20,6 +20,7 @@ enum FaceState {
 };
 
 int faceState = IDLE;
+
 unsigned long lastBlink = 0;
 bool blinking = false;
 
@@ -94,6 +95,7 @@ void drawFace() {
       case CONFUSED:
         drawConfused();
         break;
+      case IDLE:
       default:
         drawIdle();
         break;
@@ -121,7 +123,7 @@ void drawEye(int x, int y, int w, int h) {
 void drawThinking() {
   drawEye(37, 34, 11, 15);
   drawEye(91, 28, 11, 15);
-  display.drawLine(19, 14, 49, 10, SSD1306_WHITE);
+  display.drawLine(20, 14, 48, 10, SSD1306_WHITE);
 }
 
 void drawTalking() {
@@ -131,18 +133,32 @@ void drawTalking() {
 }
 
 void drawHappy() {
-  display.drawArc(27, 18, 24, 24, 20, 160, SSD1306_WHITE);
-  display.drawArc(77, 18, 24, 24, 20, 160, SSD1306_WHITE);
+  display.drawLine(27, 32, 39, 24, SSD1306_WHITE);
+  display.drawLine(39, 24, 51, 32, SSD1306_WHITE);
+
+  display.drawLine(77, 32, 89, 24, SSD1306_WHITE);
+  display.drawLine(89, 24, 101, 32, SSD1306_WHITE);
+
+  display.drawLine(48, 49, 54, 54, SSD1306_WHITE);
+  display.drawLine(54, 54, 64, 57, SSD1306_WHITE);
+  display.drawLine(64, 57, 74, 54, SSD1306_WHITE);
+  display.drawLine(74, 54, 80, 49, SSD1306_WHITE);
 }
 
 void drawSad() {
-  display.drawArc(27, 38, 24, 20, 200, 340, SSD1306_WHITE);
-  display.drawArc(77, 38, 24, 20, 200, 340, SSD1306_WHITE);
+  drawEye(39, 33, 11, 15);
+  drawEye(89, 33, 11, 15);
+
+  display.drawLine(52, 56, 58, 51, SSD1306_WHITE);
+  display.drawLine(58, 51, 64, 49, SSD1306_WHITE);
+  display.drawLine(64, 49, 70, 51, SSD1306_WHITE);
+  display.drawLine(70, 51, 76, 56, SSD1306_WHITE);
 }
 
 void drawConfused() {
   drawEye(37, 31, 11, 16);
   drawEye(91, 31, 11, 16);
+
   display.drawLine(51, 52, 77, 52, SSD1306_WHITE);
   display.drawLine(77, 52, 82, 47, SSD1306_WHITE);
 }

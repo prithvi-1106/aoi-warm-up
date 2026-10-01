@@ -33,18 +33,18 @@ The AOI firmware expects I2C communication.
 | SDA | A4 | I2C data |
 | SCL | A5 | I2C clock |
 
-\* Check the exact OLED breakout's VCC specification before reconnecting it. The current module is already operating successfully in this rebuild.
+*Check the exact OLED breakout's VCC specification before reconnecting it. The current module is already operating successfully in this rebuild.*
 
 ### Wiring Notes
 
 - Do not connect SDA/SCL to arbitrary digital pins; the Uno's conventional I2C pins are A4 and A5.
 - Keep the USB cable connected to the Arduino for both power and serial communication.
-- The Python prototype previously used **9600 baud** for serial communication.
+- The Python prototype uses **9600 baud** for serial communication.
 - The OLED address used by the firmware is **0x3C**.
 
 ## Firmware Baseline
 
-The previous AOI firmware defines these states:
+The AOI firmware defines these states:
 
 ```text
 0 = Sleep
@@ -58,18 +58,9 @@ The previous AOI firmware defines these states:
 
 The Arduino receives a single ASCII character over serial and converts it into the corresponding face state.
 
-The display is refreshed continuously and includes an automatic blinking mechanism for several states.
-
 ## What Was Tested
 
 The physical display was reconnected to the Arduino and the AOI face was successfully displayed.
-
-### Evidence
-
-![AOI components](../media/session-01-working-face.jpg)
-
-
-The available repository image records the physical component baseline. The connected-hardware photographs are retained as Session 1 evidence and will be added to the media directory at full resolution.
 
 ## Result
 
@@ -95,14 +86,7 @@ This gives the project a verified hardware baseline for the next sessions.
 
 ## What Comes Next
 
-Session 2 should move from "the face works" to a reproducible firmware project:
-
-1. create the Arduino firmware folder with the final sketch,
-2. record the exact library versions,
-3. test every face state individually,
-4. test serial commands `0` through `6`,
-5. capture a photo of at least two different expressions,
-6. document any animation bugs before reconnecting the Python system.
+Session 2 moves from the working face to a reproducible Python ↔ Arduino control path.
 
 ## Documentation Evidence Checklist
 
@@ -111,5 +95,4 @@ Session 2 should move from "the face works" to a reproducible firmware project:
 - [x] Wiring recorded
 - [x] Firmware state map recorded
 - [x] Session result recorded
-- [ ] Individual state test evidence
-- [ ] Final wiring close-up
+- [x] Python control test completed in Session 2

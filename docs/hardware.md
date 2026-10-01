@@ -36,11 +36,11 @@ The current hardware test successfully renders the AOI face.
 | SDA | A4 |
 | SCL | A5 |
 
-\* Confirm the exact OLED module specification before reconnecting power.
+*Confirm the exact OLED module specification before reconnecting power.*
 
 ## Communication
 
-The previous AOI Python prototype opens the Arduino serial port at:
+The AOI Python controller opens the Arduino serial port at:
 
 ```text
 9600 baud

@@ -1,6 +1,6 @@
 # AOI — Physical AI Companion
 
-AOI is a desktop AI companion that connects a multimodal Python software stack to a physical OLED face driven by an Arduino Uno.
+I am rebuilding AOI as a personal physical-AI project, starting from the hardware layer and moving upward into the desktop AI stack. AOI is a desktop AI companion that connects a multimodal Python software stack to a physical OLED face driven by an Arduino Uno.
 
 The original AOI prototype combined:
 - webcam vision through OpenCV

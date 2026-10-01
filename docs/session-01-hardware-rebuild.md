@@ -66,11 +66,10 @@ The physical display was reconnected to the Arduino and the AOI face was success
 
 ### Evidence
 
-![AOI components](../media/session-01-components.jpg)
+![AOI components](../media/session-01-working-face.jpg)
 
-![AOI connected hardware](../media/session-01-connected.jpg)
 
-The photographs record the component baseline and the reconstructed physical interface with the Arduino powered over USB and the OLED actively rendering the AOI face.
+The available repository image records the physical component baseline. The connected-hardware photographs are retained as Session 1 evidence and will be added to the media directory at full resolution.
 
 ## Result
 

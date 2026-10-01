@@ -1,73 +1,72 @@
 # AOI — Physical AI Companion
 
-I am rebuilding AOI as a personal physical-AI project, starting from the hardware layer and moving upward into the desktop AI stack. AOI is a desktop AI companion that connects a multimodal Python software stack to a physical OLED face driven by an Arduino Uno.
+I am rebuilding AOI as a personal physical-AI project, starting from the hardware layer and moving upward into the desktop AI stack.
 
-The original AOI prototype combined:
-- webcam vision through OpenCV
-- voice input through SpeechRecognition / PyAudioWPatch
-- cloud AI through Groq
-- neural speech through edge-tts
-- serial communication with an Arduino Uno
-- SSD1306 OLED facial animations
-- a lightweight Tkinter text console
+The original prototype combined a webcam, speech recognition, a cloud multimodal model, neural text-to-speech, an Arduino-controlled OLED face, and a small desktop console. This repository is the structured rebuild of that system, with each development stage recorded as a separate session.
 
-This repository documents the rebuild from the physical hardware upward.
+## Current Status
 
-## Rebuild Status
-
-| Stage | Status |
+| Area | Status |
 |---|---|
-| Arduino Uno available | ✅ |
-| SSD1306 OLED available | ✅ |
-| OLED wired and powered | ✅ |
-| OLED face firmware tested | ✅ |
-| Python desktop pipeline | ⏳ |
-| Vision pipeline | ⏳ |
-| Voice / wake-word pipeline | ⏳ |
-| Emotion-to-face pipeline | ⏳ |
-| Full AOI integration | ⏳ |
+| Arduino Uno | Working |
+| SSD1306 128×64 OLED | Working |
+| I2C communication | Working |
+| Animated AOI face | Working |
+| Serial face-state control | Working |
+| Python assistant | Prototype |
+| Webcam vision | Prototype |
+| Speech recognition | Prototype |
+| Neural TTS | Prototype |
+| Multimodal AI | Prototype |
+| Full integration | In progress |
 
-## Repository Structure
+## System Overview
 
-```
-.
-├── docs/
-│   ├── development-log.md
-│   ├── hardware.md
-│   ├── project-spec.md
-│   ├── serial-protocol.md
-│   └── session-01-hardware-rebuild.md
-├── firmware/
-├── media/
-├── src/
-└── tools/
-```
+AOI is being developed as a layered system:
 
-## Hardware
+- **Hardware:** Arduino Uno + SSD1306 OLED
+- **Vision:** OpenCV
+- **Voice input:** SpeechRecognition + PyAudioWPatch
+- **AI:** Groq multimodal API
+- **Voice output:** Edge TTS
+- **Desktop UI:** Tkinter
+- **Communication:** Python serial connection to Arduino
+- **Expression system:** OLED face states controlled by Arduino firmware
 
-The current rebuild starts with:
+The OLED is the first physical output interface. The objective is to make the physical and software layers operate as one assistant.
 
-- Arduino Uno
-- SSD1306 I2C OLED, 128×64
-- USB cable
-- jumper wires
+## Session 1 — Hardware Reconstruction
 
-The standard Arduino Uno I2C pins used by the AOI firmware are:
+The first rebuild session focused on the minimum working physical interface.
 
-| OLED | Arduino Uno |
-|---|---|
-| GND | GND |
-| VCC | 5V or the voltage specified by the OLED module |
-| SDA | A4 |
-| SCL | A5 |
+![AOI components](media/session-01-components.jpg)
 
-**Important:** verify the OLED module's VCC marking before applying power. The wiring table describes the current AOI target configuration, not a universal rule for every SSD1306 breakout.
+The component photo records the Arduino Uno and SSD1306 OLED before the connection was rebuilt.
 
-## AOI Face States
+![AOI connected hardware](media/session-01-connected.jpg)
 
-The firmware uses one-character serial commands:
+The connected setup shows the Arduino powered over USB and the OLED displaying the AOI face.
 
-| Code | State |
+The current I2C wiring is:
+
+| OLED | Arduino Uno | Function |
+|---|---|---|
+| GND | GND | Ground |
+| VCC | 5V* | Power |
+| SDA | A4 | I2C data |
+| SCL | A5 | I2C clock |
+
+*The OLED breakout's voltage specification should be checked before applying power.*
+
+**Session 1 result:** the physical AOI face is working.
+
+[Read the full Session 1 documentation](docs/session-01-hardware-rebuild.md).
+
+## OLED Face Protocol
+
+The Arduino firmware accepts one ASCII character at a time:
+
+| Command | State |
 |---:|---|
 | 0 | Sleep |
 | 1 | Idle |
@@ -77,21 +76,11 @@ The firmware uses one-character serial commands:
 | 5 | Sad |
 | 6 | Confused |
 
-## Session Documentation
+The firmware also includes automatic blinking for selected states.
 
-Session 1 establishes the physical baseline and records evidence that the Arduino can drive the OLED face.
+## Software Stack
 
-See [Session 1 — Hardware Reconstruction](docs/session-01-hardware-rebuild.md).
-
-## Media
-
-The first hardware test photo is stored in `media/session-01-working-face.jpg`.
-
-![AOI Arduino + SSD1306 working face](media/session-01-working-face.jpg)
-
-## Original Software Stack
-
-Python packages used by the previous AOI prototype:
+### Python
 
 - opencv-python
 - pyserial
@@ -101,20 +90,58 @@ Python packages used by the previous AOI prototype:
 - SpeechRecognition
 - pyaudiowpatch
 
-Arduino libraries:
+Standard-library modules used by the prototype include time, sys, base64, re, threading, asyncio, and tkinter.
+
+### Arduino
 
 - Adafruit GFX Library
 - Adafruit SSD1306
 - Wire.h
 
-The original prototype code is being reconstructed and improved incrementally rather than copied into the repository all at once.
+## Repository Structure
 
-## Development Philosophy
+    .
+    ├── docs/
+    ├── firmware/
+    ├── media/
+    ├── src/
+    └── tools/
 
-Each rebuild session should leave behind three things:
+Documentation, firmware, source code, and physical-build evidence are kept separate so the rebuild remains easy to follow.
 
-1. a working technical milestone,
-2. evidence such as photos, screenshots, or serial logs,
-3. a short development record explaining what changed and why.
+## Development Method
 
-This keeps the project reproducible and makes the final build easier to understand.
+I am documenting the project as a sequence of development sessions. Each session records:
+
+1. objective
+2. hardware or software changes
+3. connections and configuration
+4. code and library requirements
+5. test result
+6. photographic or screen evidence
+7. problems discovered
+8. next step
+
+This repository is therefore both the project source and the development record.
+
+## Next Milestone
+
+The next stage is to turn the working face prototype into a reproducible Arduino firmware project, record the exact library requirements, test every face state individually, and verify the serial commands before reconnecting the Python system.
+
+## Security
+
+API keys and credentials are kept out of the repository. The previous Python prototype uses a placeholder for the Groq API key and must be configured locally.
+
+## Documentation
+
+- [Hardware documentation](docs/hardware.md)
+- [Serial protocol](docs/serial-protocol.md)
+- [Project specification](docs/project-spec.md)
+- [Development log](docs/development-log.md)
+- [Session 1 — Hardware Reconstruction](docs/session-01-hardware-rebuild.md)
+
+### Session 1 Evidence
+
+- [Component photo](media/session-01-components.jpg)
+- [Connected hardware photo](media/session-01-connected.jpg)
+- [Second connected-hardware photo](media/session-01-connected-2.jpg)

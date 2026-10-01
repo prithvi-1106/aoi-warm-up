@@ -39,13 +39,12 @@ The OLED is the first physical output interface. The objective is to make the ph
 
 The first rebuild session focused on the minimum working physical interface.
 
-![AOI components](media/session-01-components.jpg)
+![AOI components](media/session-01-working-face.jpg)
 
 The component photo records the Arduino Uno and SSD1306 OLED before the connection was rebuilt.
 
-![AOI connected hardware](media/session-01-connected.jpg)
 
-The connected setup shows the Arduino powered over USB and the OLED displaying the AOI face.
+The connected hardware evidence is recorded in the Session 1 documentation and will be added to the media directory at full resolution.
 
 The current I2C wiring is:
 
@@ -143,5 +142,3 @@ API keys and credentials are kept out of the repository. The previous Python pro
 ### Session 1 Evidence
 
 - [Component photo](media/session-01-components.jpg)
-- [Connected hardware photo](media/session-01-connected.jpg)
-- [Second connected-hardware photo](media/session-01-connected-2.jpg)
